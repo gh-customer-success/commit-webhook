@@ -1,0 +1,62 @@
+name: Main Deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+permissions:
+  id-token: write # This is required for requesting the JWT contents: read # This is required for actions/checkout
+  contents: read
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️  Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Node Installer
+        uses: actions/setup-node@v2
+        with:
+            node-version: '14'
+            cache: 'npm'
+      - name: Install npm packages
+        run: |
+          npm i
+          cd src 
+          npm i
+            
+      - name: Run Tests
+        run: npm run lint
+        
+  deploy:
+    needs: 'test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️  Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Node Installer
+        uses: actions/setup-node@v2
+        with:
+            node-version: '14'
+            cache: 'npm'
+            
+      - name: 🔐 AWS Authentication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::066866130858:role/OIDC-Create-Lambda-Api
+          aws-region: us-east-1
+
+      - name: 🚀 CDK Deploy
+        run: |
+          npm i -g aws-cdk
+          npm i -D @types/node typescript ts-node
+          cd src 
+          npm i -D @types/node typescript ts-node
+          npm i
+          cd .. 
+          cdk synth
+          cdk deploy --all --require-approval never
+            node-version: '14'
+            cache: 'npm'

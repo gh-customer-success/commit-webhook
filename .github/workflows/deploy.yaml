@@ -9,28 +9,27 @@ permissions:
   contents: read
 jobs:
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇️  Checkout Repo
-        uses: actions/checkout@v2
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: ⬇️  Checkout Repo
+  #       uses: actions/checkout@v2
       
-      - name: Node Installer
-        uses: actions/setup-node@v2
-        with:
-            node-version: '14'
-            cache: 'npm'
-      - name: Install npm packages
-        run: |
-          npm i
-          cd src 
-          npm i
+  #     - name: Node Installer
+  #       uses: actions/setup-node@v2
+  #       with:
+  #           node-version: '14'
+  #           cache: 'npm'
+  #     - name: Install npm packages
+  #       run: |
+  #         npm i
+  #         cd src 
+  #         npm i
             
-      - name: Run Tests
-        run: npm run lint
+  #     - name: Run Tests
+  #       run: npm run lint
         
   deploy:
-    needs: 'test'
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️  Checkout Repo

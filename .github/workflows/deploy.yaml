@@ -42,7 +42,7 @@ jobs:
             cache: 'npm'
             
       - name: 🔐 AWS Authentication
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::066866130858:role/OIDC-Create-Lambda-Api
           aws-region: us-east-1

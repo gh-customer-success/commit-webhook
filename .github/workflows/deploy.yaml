@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️  Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Node Installer
         uses: actions/setup-node@v2
@@ -57,5 +57,5 @@ jobs:
           cd .. 
           cdk synth
           cdk deploy --all --require-approval never
-            node-version: '14'
+            node-version: '18'
             cache: 'npm'

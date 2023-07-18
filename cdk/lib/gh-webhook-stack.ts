@@ -18,7 +18,7 @@ export default class WebHook extends Stack {
     });
 
     // eslint-disable-next-line no-unused-vars
-    const apiWebhook = new api.RestApi(this, 'github-app-webhook-api', {
+    const apiWebhook = new api.RestApi(this, 'github-webhook-api', {
       description: 'GitHub enpoint for webhook events',
       deployOptions: {
         stageName: 'gh-webhook'

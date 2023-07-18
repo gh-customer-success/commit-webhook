@@ -21,12 +21,12 @@ export default class WebHook extends Stack {
     const apiWebhook = new api.RestApi(this, 'github-app-webhook-api', {
       description: 'GitHub enpoint for webhook events',
       deployOptions: {
-        stageName: 'production'
+        stageName: 'gh-webhook'
       }
     });
 
     apiWebhook.root
-      .addResource('gh-webhook')
+      .addResource('commit')
       .addMethod('POST', new api.LambdaIntegration(githubWebhook));
   }
 }

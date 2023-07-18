@@ -57,5 +57,3 @@ jobs:
           cd .. 
           cdk synth
           cdk deploy --all --require-approval never
-            node-version: '18'
-            cache: 'npm'
